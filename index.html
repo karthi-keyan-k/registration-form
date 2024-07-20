@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body back>
+    <form onsubmit="return accept(event)">
+        <br>
+        <br>
+        <h1>Registration Form</h1>
+        <br>
+        <br>
+        <p>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="Enter your name"><br>
+            <span class="error" id="nameerror"></span>
+        </p>
+        <p>
+            <label for="regno">Reg no:</label>
+            <input type="text" name="regno" id="regno"  placeholder="Enter your regno"><br>
+            <span class="error" id="regnoerror"></span>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email"  placeholder="Enter your email"><br>
+            <span class="error" id="emailerror"></span>
+        </p>
+        <p>
+            <label for="course">Courses:</label>
+            <select name="course" id="course">
+                <option value=""></option>
+                <option value="ECE">ECE</option>
+                <option value="CSC">CSC</option>
+                <option value="IT">IT</option>
+            </select><br>
+            <span class="error" id="courseerror"></span>
+        </p>
+        <p>
+            <div class="check">
+                <input type="checkbox" name="check" class="cb" id="check">
+                <label for="check" class="agree"> I agree </label>
+            </div><br>
+            <span class="error" id="checkerror"></span>
+        </p>
+        <p>
+            <input type="submit" class="submit">
+            <input type="reset" class="reset">
+        </p>
+        <br><br>
+    </form>
+
+    <script>
+        function accept(e) {
+            
+            const name = document.getElementById("name").value;
+            const regno = document.getElementById("regno").value;
+            const email = document.getElementById("email").value;
+            const course = document.getElementById("course").value;
+            const agree = document.getElementById("check").checked;
+
+            const nameError = document.getElementById("nameerror");
+            const regnoError = document.getElementById("regnoerror");
+            const emailError = document.getElementById("emailerror");
+            const courseError = document.getElementById("courseerror");
+            const agreeError = document.getElementById("checkerror");
+
+            nameError.textContent = "";
+            regnoError.textContent = "";
+            emailError.textContent = "";
+            courseError.textContent = "";
+            agreeError.textContent = "";
+
+            let result = true;
+
+            if (name === "" || /\d/.test(name)) {
+                nameError.textContent = "Please enter your name properly.";
+                result = false;
+                document.getElementById("name").style.borderColor="red";
+            }
+
+            if (regno === "" || regno.length > 10) {
+                regnoError.textContent = "Please enter your regno properly.";
+                result = false;
+                document.getElementById("regno").style.borderColor="red";
+            }
+
+            if (email === "" || !email.includes("@")) {
+                emailError.textContent = "Please enter your email properly.";
+                document.getElementById("email").style.borderColor="red";
+                result = false;
+            }
+
+            if (course === "") {
+                courseError.textContent = "Please select your course.";
+                document.getElementById("course").style.borderColor="red";
+                result = false;
+            }
+
+            if (!agree) {
+                agreeError.textContent = "Please agree to the terms and conditions.";
+                document.getElementById("check").style.borderColor="red";
+                result = false;
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>
